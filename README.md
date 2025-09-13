@@ -3,13 +3,15 @@
 # 🛒 Ecommerce Product Microservice
 
 Microservicio para la gestión de productos en un sistema de e-commerce, desarrollado con [FastAPI](https://fastapi.tiangolo.com/).
+
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green)
 ![Python](https://img.shields.io/badge/Python-3.12.1-blue)
+![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+
 <!--![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)-->
 <!--![Security](https://img.shields.io/badge/Security-OWASP%20Top%2010-brightgreen)-->
-![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow)
 <!--![License]()-->
-![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 ---
 
 ## 🚀 Características
