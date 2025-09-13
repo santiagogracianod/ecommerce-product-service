@@ -27,21 +27,55 @@ Microservicio para la gestión de productos en un sistema de e-commerce, desarro
 ## 📁 Estructura del Proyecto
 
 ```text
-ecommerce-product-service
-├── src/
-│   ├── main.py                # Punto de entrada de la aplicación
+ecommerce-product-service/
+│
+├── app/
+│   ├── main.py
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── routes/
+│   │       ├── __init__.py
+│   │       └── products.py
+│   │
+│   ├── core/
+│   │   ├── __init__.py
+│   │   └── config.py
+│   │
+│   ├── db/
+│   │   ├── __init__.py
+│   │   ├── base.py
+│   │   └── session.py
+│   │
 │   ├── models/
-│   │   └── product.py         # Definición del modelo de producto
-│   ├── routes/
-│   │   └── product_routes.py  # Rutas para manejar productos
-│   └── services/
-│       └── product_service.py # Lógica de negocio para productos
-├── requirements.txt           # Dependencias del proyecto
-├── Dockerfile                 # Imagen para contenerización
-├── .gitignore                 # Archivos ignorados por git
-└── README.md                  # Documentación del proyecto
+│   │   ├── __init__.py
+│   │   └── product.py
+│   │
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   └── product.py
+│   │
+│   ├── crud/
+│   │   ├── __init__.py
+│   │   └── product.py
+│   │
+│   ├── services/
+│   │   ├── __init__.py
+│   │   └── product_service.py
+│   │
+│   └── __init__.py
+│
+├── tests/
+│   ├── __init__.py
+│   └── test_products.py
+│
+├── .env
+├── requirements.txt
+├── Dockerfile
+├── .gitignore
+└── README.md
 ```
 
+Para más informacion mirar la [Wiki](https://github.com/RickContreras/ecommerce-product-service/wiki)
 ---
 
 ## ⚙️ Instalación
@@ -74,17 +108,20 @@ ecommerce-product-service
 P**Posibles librerías para futuro:**
 
 - `black`, `isort`, `flake8`, `mypy` (calidad y estilo de código)
-- `pytest`, `pytest-cov`, `httpx` (pruebas)
+- `pytest`, `pytest-cov`, `httpx` (🧪 Testing y calidad de código)
 - `python-dotenv` (entorno y configuración)
 - `mkdocs`, `Sphinx` (documentación)
 - `bandit` (seguridad)
+- `alembic`, `databases` (Migraciones y Acceso async a DB)
+- `orjson`, `python-multipart`, `loguru` (📦 Serialización, rendimiento y utilidades)
+- `aiokafka`, `pika`, `faststream` (📡 Comunicación entre microservicios (si se usará eventos))
 
 ---
 
 ## 🏃 Ejecución en desarrollo
 
 ```bash
-uvicorn src.main:app --reload
+uvicorn app.main:app --reload
 ```
 
 Accede a la documentación interactiva en [http://localhost:8000/docs](http://localhost:8000/docs).

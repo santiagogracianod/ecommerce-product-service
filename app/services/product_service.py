@@ -1,4 +1,4 @@
-from src.models.product import ProductSchema
+from app.models.product import ProductSchema
 
 class ProductService:
     def __init__(self):
