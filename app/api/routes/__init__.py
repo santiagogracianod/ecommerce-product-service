@@ -1,1 +1,0 @@
-# Este archivo permite que la carpeta 'routes' sea reconocida como un módulo de Python.
