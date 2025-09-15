@@ -173,6 +173,10 @@ celerybeat.pid
 
 # Environments
 .env
+.env.local
+.env.production
+.env.staging
+*.env
 .venv
 env/
 venv/
@@ -247,4 +251,26 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/python,linux,macos,windows
+# Security files
+secrets.txt
+secrets.json
+private_keys/
+ssl/
+*.key
+*.pem
+*.crt
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Scripts output
+scripts/output/
+scripts/secrets/
+
+#Others
+
+nohup.out
+
+# End of https://www.toptal.com/developers/gitignore/api/python,linux,macos,windowslogs/

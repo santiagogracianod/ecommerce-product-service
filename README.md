@@ -27,52 +27,75 @@ Microservicio para la gestión de productos en un sistema de e-commerce, desarro
 ## 📁 Estructura del Proyecto
 
 ```text
-ecommerce-product-service/
-│
+/workspaces/ecommerce-product-service/
 ├── app/
-│   ├── main.py
-│   ├── api/
-│   │   ├── __init__.py
-│   │   └── routes/
-│   │       ├── __init__.py
-│   │       └── products.py
-│   │
+│   ├── __init__.py
+│   ├── main.py                          # Punto de entrada de la aplicación
 │   ├── core/
 │   │   ├── __init__.py
-│   │   └── config.py
-│   │
-│   ├── db/
+│   │   ├── config.py                    # Configuración y variables de entorno
+│   │   ├── security.py                  # Funciones de seguridad
+│   │   └── exceptions.py                # Excepciones personalizadas
+│   ├── api/
 │   │   ├── __init__.py
-│   │   ├── base.py
-│   │   └── session.py
-│   │
-│   ├── models/
-│   │   ├── __init__.py
-│   │   └── product.py
-│   │
-│   ├── schemas/
-│   │   ├── __init__.py
-│   │   └── product.py
-│   │
+│   │   ├── deps.py                      # Dependencias compartidas
+│   │   └── v1/
+│   │       ├── __init__.py
+│   │       ├── api.py                   # Router principal de la API
+│   │       └── endpoints/
+│   │           ├── __init__.py
+│   │           └── products.py          # Endpoints de productos
 │   ├── crud/
 │   │   ├── __init__.py
-│   │   └── product.py
-│   │
+│   │   ├── base.py                      # CRUD base genérico
+│   │   └── product.py                   # CRUD específico de productos
+│   ├── db/
+│   │   ├── __init__.py
+│   │   ├── base.py                      # Base SQLAlchemy
+│   │   ├── session.py                   # Configuración de sesión DB
+│   │   └── init_db.py                   # Inicialización de DB
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── product.py                   # Modelos SQLAlchemy
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   └── product.py                   # Schemas Pydantic (YA EXISTE)
 │   ├── services/
 │   │   ├── __init__.py
-│   │   └── product_service.py
-│   │
-│   └── __init__.py
-│
+│   │   └── product_service.py           # Lógica de negocio
+│   └── utils/
+│       ├── __init__.py
+│       └── helpers.py                   # Utilidades generales
 ├── tests/
 │   ├── __init__.py
-│   └── test_products.py
-│
-├── .env
-├── requirements.txt
-├── Dockerfile
+│   ├── conftest.py                      # Configuración de pytest
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── test_products.py             # Tests de endpoints
+│   ├── crud/
+│   │   ├── __init__.py
+│   │   └── test_product.py              # Tests de CRUD
+│   └── services/
+│       ├── __init__.py
+│       └── test_product_service.py      # Tests de servicios
+├── alembic/                             # Migraciones de base de datos
+│   ├── versions/
+│   ├── env.py
+│   └── script.py.mako
+├── docs/                                # Documentación adicional
+│   └── api.md
+├── scripts/                             # Scripts de utilidad
+│   ├── init_db.py
+│   └── seed_data.py
+├── .env                                 # Variables de entorno (local)
+├── .env.example                         # Ejemplo de variables de entorno
 ├── .gitignore
-└── README.md
+├── alembic.ini                          # Configuración de Alembic
+├── docker-compose.yml                   # Para desarrollo local
+├── Dockerfile                           # Ya existe
+├── pyproject.toml                       # Configuración de dependencias
+├── requirements.txt                     # Ya existe
+└── README.md                            # Ya existe
 ```
 
 Para más informacion mirar la [Wiki](https://github.com/RickContreras/ecommerce-product-service/wiki)
@@ -94,7 +117,7 @@ Para más informacion mirar la [Wiki](https://github.com/RickContreras/ecommerce
 
 3. **Instala las dependencias**
    ```bash
-   pip install -r requirements.txt
+   pip install -r requirements-devI.txt
    ```
 
 ### 📦 Dependencias Python principales *(En desarrollo)*
@@ -117,6 +140,44 @@ P**Posibles librerías para futuro:**
 - `aiokafka`, `pika`, `faststream` (📡 Comunicación entre microservicios (si se usará eventos))
 
 ---
+
+## 🔐 Configuración de Seguridad
+
+**⚠️ IMPORTANTE**: Este proyecto NO incluye credenciales reales por seguridad.
+
+### Primera configuración:
+
+1. **Genera credenciales seguras:**
+   ```bash
+   python scripts/generate_secrets.py template
+   ```
+
+2. **Copia y personaliza tu configuración:**
+   ```bash
+   cp .env.example .env
+   # Edita .env con tus credenciales reales
+   ```
+
+3. **Variables de entorno requeridas:**
+   - `DATABASE_URL` - Conexión a PostgreSQL## 🔐 Configuración de Seguridad
+
+**⚠️ IMPORTANTE**: Este proyecto NO incluye credenciales reales por seguridad.
+
+### Primera configuración:
+
+1. **Genera credenciales seguras:**
+   ```bash
+   python scripts/generate_secrets.py template
+   ```
+
+2. **Copia y personaliza tu configuración:**
+   ```bash
+   cp .env.example .env
+   # Edita .env con tus credenciales reales
+   ```
+
+3. **Variables de entorno requeridas:**
+   - `DATABASE_URL` - Conexión a PostgreSQL
 
 ## 🏃 Ejecución en desarrollo
 
