@@ -8,8 +8,7 @@ Microservicio para la gestión de productos en un sistema de e-commerce, desarro
 ![Python](https://img.shields.io/badge/Python-3.12.1-blue)
 ![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
-
-<!--![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)-->
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
 <!--![Security](https://img.shields.io/badge/Security-OWASP%20Top%2010-brightgreen)-->
 <!--![License]()-->
 ---
@@ -20,6 +19,8 @@ Microservicio para la gestión de productos en un sistema de e-commerce, desarro
 - 📄 API RESTful con documentación automática (Swagger/OpenAPI)
 - 🧩 Estructura modular y escalable
 - 🐳 Listo para contenerización con Docker
+- 🌱 Datos de prueba con productos reales preconfigurados
+- 🗃️ Base de datos PostgreSQL con migraciones Alembic
 - 🧪 Preparado para integración con bases de datos y pruebas unitarias *(En desarrollo)*
 
 ---
@@ -189,6 +190,35 @@ Accede a la documentación interactiva en [http://localhost:8000/docs](http://lo
 
 ---
 
+## 🎯 Comandos Makefile
+
+```bash
+# Inicialización completa (migraciones + datos)
+make init
+
+# Solo poblar con datos de prueba
+make seed
+
+# Iniciar servidor en foreground
+make server
+
+# Iniciar servidor en background
+make server-bg
+
+# Ver estado del servidor
+make status
+
+# Limpiar base de datos
+make clean
+
+# Ejecutar tests
+make test
+
+# Ver todos los comandos disponibles
+make help
+```
+
+---
 ## 🐳 Docker
 
 1. **Construye la imagen**
@@ -227,12 +257,15 @@ flake8 .
 
 ## 📚 Endpoints principales
 
-| Método | Endpoint                   | Descripción           |
-|--------|----------------------------|-----------------------|
-| POST   | `/products`                | Crear producto        |
-| GET    | `/products/{product_id}`   | Obtener producto por ID|
-| PUT    | `/products/{product_id}`   | Actualizar producto   |
-| DELETE | `/products/{product_id}`   | Eliminar producto     |
+| Método | Endpoint                      | Descripción                    |
+|--------|-------------------------------|--------------------------------|
+| GET    | `/`                          | Información de la API          |
+| GET    | `/health`                    | Health check                   |
+| GET    | `/api/v1/products/`          | Listar todos los productos     |
+| POST   | `/api/v1/products/`          | Crear nuevo producto           |
+| GET    | `/api/v1/products/{uuid}`    | Obtener producto por UUID      |
+| PUT    | `/api/v1/products/{uuid}`    | Actualizar producto            |
+| DELETE | `/api/v1/products/{uuid}`    | Eliminar producto              |
 
 ---
 
