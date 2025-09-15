@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from typing import List
+import uuid
 
 from app.schemas.product import ProductSchema, ProductCreate, ProductUpdate
 from app.services.product_service import ProductService
@@ -27,7 +28,7 @@ def list_products(
 
 @router.get("/{product_id}", response_model=ProductSchema)
 def get_product(
-    product_id: int,
+    product_id: uuid.UUID,
     db: Session = Depends(get_db)
 ):
     service = ProductService(db)
@@ -41,7 +42,7 @@ def get_product(
 
 @router.put("/{product_id}", response_model=ProductSchema)
 def update_product(
-    product_id: int,
+    product_id: uuid.UUID,
     product: ProductUpdate,
     db: Session = Depends(get_db)
 ):
@@ -56,7 +57,7 @@ def update_product(
 
 @router.delete("/{product_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_product(
-    product_id: int,
+    product_id: uuid.UUID,
     db: Session = Depends(get_db)
 ):
     service = ProductService(db)
