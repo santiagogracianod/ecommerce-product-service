@@ -1,25 +1,30 @@
 from pydantic import BaseModel, Field, validator
 from typing import Optional
 from datetime import datetime
+from decimal import Decimal
+import uuid
 
 class ProductBase(BaseModel):
-    name: str = Field(..., min_length=1, max_length=255)
-    description: Optional[str] = Field(None, max_length=1000)
-    price: float = Field(..., gt=0)
-    stock: int = Field(..., ge=0)
+    name: str = Field(..., min_length=1)
+    description: str = Field(..., min_length=1)
+    price: Decimal = Field(..., gt=0, decimal_places=2)
+    image_url: Optional[str] = Field(None)
+    category: Optional[str] = Field(None)
+    stock: Optional[int] = Field(default=0, ge=0)
 
 class ProductCreate(ProductBase):
     pass
 
 class ProductUpdate(BaseModel):
-    name: Optional[str] = Field(None, min_length=1, max_length=255)
-    description: Optional[str] = Field(None, max_length=1000)
-    price: Optional[float] = Field(None, gt=0)
+    name: Optional[str] = Field(None, min_length=1)
+    description: Optional[str] = Field(None, min_length=1)
+    price: Optional[Decimal] = Field(None, gt=0, decimal_places=2)
+    image_url: Optional[str] = Field(None)
+    category: Optional[str] = Field(None)
     stock: Optional[int] = Field(None, ge=0)
 
 class ProductInDB(ProductBase):
-    id: int
-    is_active: bool
+    id: uuid.UUID
     created_at: datetime
     updated_at: Optional[datetime]
     
