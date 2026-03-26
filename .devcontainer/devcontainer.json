@@ -57,7 +57,9 @@
 	"forwardPorts": [
         8000,
         5432,
-        6379
+	6379,
+	9090,
+	3001
     ],
 	"postCreateCommand": "pip install -r requirements-dev.txt && rm -f .git/hooks/pre-push",
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
